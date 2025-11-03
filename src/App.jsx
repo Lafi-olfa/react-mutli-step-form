@@ -1,10 +1,13 @@
 import './App.css'
+import Card from './components/card'
+import Steps from './components/steps'
 
 function App() {
-   return (
-    <>
-    <p>multi step form</p>
-    </>
+  return (
+    <div className="form-container">
+      <Steps />
+      <Card />
+    </div>
   )
 }
 
