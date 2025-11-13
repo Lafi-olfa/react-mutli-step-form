@@ -4,7 +4,7 @@ import Steps from './components/steps'
 
 function App() {
   return (
-    <div className="form-container">
+    <div className="conatiner mx-auto  px-4 py-8 max-w-3xl max-h-2xl text-base relative">
       <Steps />
       <Card />
     </div>
