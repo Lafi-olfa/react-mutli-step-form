@@ -3,42 +3,38 @@ export default function Steps() {
         {
             number: 1,
             title: 'STEP 1',
-            desciption: 'YOUR INFO'
+            description: 'YOUR INFO'
         },
         {
             number: 2,
             title: "STEP 2",
-            desciption: 'SELECT PLAN'
+            description: 'SELECT PLAN'
         },
         {
             number: 3,
             title: 'STEP 3',
-            desciption: 'ADD-ONS'
+            description: 'ADD-ONS'
         },
         {
             number: 4,
             title: "STEP 4",
-            desciption: 'SUMMURY'
+            description: 'SUMMARY'
         }
     ]
+    
     return (
-        <div id="steps" className="flex justify-center gap-4 items-center max-w-2xl mx-auto px-4 h-50  ">
-            {
-                steps.map((step) => (
-                    <div className="flex flex-col gap-2 items-center justify-center ">
-                        <div className="rounded-full text-white bg-transparent hover:text-black hover:bg-gray-300 w-8 text-center
-               border border-white cursor-pointer 
-               ">
-                            {step.number}
+        <div className="w-full bg-[url('/public/assets/bg-sidebar-mobile.svg')] lg:bg-[url('/public/assets/bg-sidebar-desktop.svg')] bg-no-repeat bg-cover bg-center" id="steps">
+            <div className="container mx-auto p-12">
+                <div className="flex justify-center gap-4">
+                    {steps.map((step) => (
+                        <div key={step.number} className="flex flex-col items-center">
+                            <div className="rounded-full w-10 h-10 flex items-center justify-center border-2 font-bold bg-transparent text-white border-white">
+                                {step.number}
+                            </div>
                         </div>
-                        <div className="flex-col bg-cyan-400 hidden">
-                            <h1>{step.title}</h1>
-                            <p> {step.desciption} </p>
-                        </div>
-                    </div>
-                ))
-            }
+                    ))}
+                </div>
+            </div>
         </div>
     )
-
 }
