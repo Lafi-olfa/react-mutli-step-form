@@ -26,8 +26,3 @@
 body {
   font-family: 'Ubuntu', sans-serif;
 }
-#steps{
-  background-image: url('/public/assets/bg-sidebar-mobile.svg');
-  background-repeat: no-repeat;
-  width: 100%;
-}
