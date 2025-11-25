@@ -2,6 +2,9 @@ import Steps from "./components/steps";
 import Buttons from "./components/buttons";
 import PersonalInfo from "./components/personal-info";
 import SelectPlan from "./components/select-plan";
+import PickAddons from "./components/pick-addons";
+import Finishing from "./components/finishing";
+import { ThankYou } from "./components/thank-you";
 // import { useState } from "react";
 
 export default function App() {
@@ -24,7 +27,10 @@ export default function App() {
     } */}
       <div className="d-flex flex-row">
         {/* <PersonalInfo/> */}
-        <SelectPlan />
+        {/* <SelectPlan /> */}
+        {/* <PickAddons/> */}
+          {/* <Finishing/> */}
+          <ThankYou/>
         {/* buttons */}
         <Buttons />
       </div>
