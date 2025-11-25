@@ -1,6 +1,6 @@
 export default function PersonalInfo(){
      return (
-    <div className="bg-white mx-4 -mt-8 p-6 z-10 rounded-none">
+    <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10 rounded-none">
         <div className="text-start mb-6">
           <h2 className="font-bold text-2xl text-gray-800 mb-2">Personal info</h2>
           <p className="text-gray-500 text-lg">Please provide your name, email address, and phone number.</p>

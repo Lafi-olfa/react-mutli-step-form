@@ -15,16 +15,19 @@ export default function App() {
   //   }
   //  }
   return (
-    <div className="min-h-screen flex flex-col rounded-none ">
+    <div className="min-h-screen flex flex-col rounded-none md:flex-row ">
       {/* steps bar */}
-    <Steps/>
-    {/* cards */}
-    {/* {
+      <Steps />
+      {/* cards */}
+      {/* {
       renderStep()
     } */}
-<SelectPlan/>
-    {/* buttons */}
-    <Buttons/>
+      <div className="d-flex flex-row">
+        {/* <PersonalInfo/> */}
+        <SelectPlan />
+        {/* buttons */}
+        <Buttons />
+      </div>
     </div>
   )
 }
