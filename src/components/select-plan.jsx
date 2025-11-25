@@ -43,7 +43,7 @@ export default function SelectPlan() {
   };
 
   return (
-    <div className="bg-white mx-4-mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
+    <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
       {/* Header */}
       <div className="text-start mb-6">
         <h2 className="font-bold text-2xl text-gray-800 mb-2">Select your plan</h2>
@@ -58,8 +58,8 @@ export default function SelectPlan() {
               key={plan.id}
               onClick={() => handlePlanSelect(plan.id)}
               className={`border-2 flex flex-row md:flex-col gap-4 rounded-lg px-4 py-4 h-28 md:w-38 md:h-38 cursor-pointer transition-all duration-200 hover:border-purple-500 ${selectedPlan === plan.id
-                  ? 'border-purple-950 bg-purple-50'
-                  : 'border-gray-300 bg-white'
+                ? 'border-purple-950 bg-purple-50'
+                : 'border-gray-300 bg-white'
                 }`}
             >
               <img
@@ -89,8 +89,8 @@ export default function SelectPlan() {
           <div className="flex items-center justify-center gap-6">
             <span
               className={`font-medium text-sm transition-colors ${!isYearlyBilling
-                  ? 'text-marine-blue'
-                  : 'text-gray-500'
+                ? 'text-marine-blue'
+                : 'text-gray-500'
                 }`}
             >
               Monthly
@@ -110,8 +110,8 @@ export default function SelectPlan() {
 
             <span
               className={`font-medium text-sm transition-colors ${isYearlyBilling
-                  ? 'text-marine-blue'
-                  : 'text-gray-500'
+                ? 'text-marine-blue'
+                : 'text-gray-500'
                 }`}
             >
               Yearly

@@ -27,9 +27,14 @@ export default function Steps() {
             <div className="container mx-auto p-12">
                 <div className="flex md:flex-col md:gap-6 justify-center gap-4">
                     {steps.map((step) => (
-                        <div key={step.number} className="flex flex-col items-center">
-                            <div className="rounded-full w-10 h-10 flex items-center justify-center border-2 font-bold bg-transparent text-white border-white">
+                        <div key={step.number} className="flex flex-col md:flex-row gap-2 items-center ">
+                            <div className="rounded-full w-12 h-9 flex items-center justify-center border-2 font-bold bg-transparent text-white border-white">
                                 {step.number}
+                            </div>
+                            <div className="hidden md:flex flex-row md:flex-col w-full">
+                                <p className="text-gray-300">{step.title}</p>
+                                <span className="text-white">{step.description}</span>
+
                             </div>
                         </div>
                     ))}
