@@ -4,7 +4,7 @@ import PersonalInfo from "./components/personal-info";
 import SelectPlan from "./components/select-plan";
 import PickAddons from "./components/pick-addons";
 import Finishing from "./components/finishing";
-import { ThankYou } from "./components/thank-you";
+import ThankYou from "./components/thank-you";
 // import { useState } from "react";
 
 export default function App() {
@@ -18,14 +18,14 @@ export default function App() {
   //   }
   //  }
   return (
-    <div className="min-h-screen flex flex-col rounded-none md:flex-row ">
+    <div className="min-h-screen overflow-x-hidden flex flex-col rounded-none md:flex-row ">
       {/* steps bar */}
-      <Steps />
+      <Steps  />
       {/* cards */}
       {/* {
       renderStep()
     } */}
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row w-full">
         {/* <PersonalInfo/> */}
         {/* <SelectPlan /> */}
         {/* <PickAddons/> */}

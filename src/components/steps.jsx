@@ -23,7 +23,7 @@ export default function Steps() {
     ]
 
     return (
-        <div className="w-full fiexd bg-[url('/public/assets/bg-sidebar-mobile.svg')] md:bg-[url('/public/assets/bg-sidebar-desktop.svg')] bg-no-repeat md:w-sm md:mx-2" id="steps">
+        <div className="w-full fiexd bg-[url('/public/assets/bg-sidebar-mobile.svg')] md:bg-[url('/public/assets/bg-sidebar-desktop.svg')] bg-no-repeat md:w-sm md:mx-2 bg-cover" id="steps">
             <div className="container mx-auto p-12">
                 <div className="flex md:flex-col md:gap-6 justify-center gap-4">
                     {steps.map((step) => (
