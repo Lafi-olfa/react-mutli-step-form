@@ -1,4 +1,8 @@
+import { useContext } from "react"
+import AppContext from "../context/AppContext"
+
 export default function Steps() {
+    const { currentStep } = useContext(AppContext);
     const steps = [
         {
             number: 1,
@@ -28,7 +32,7 @@ export default function Steps() {
                 <div className="flex md:flex-col md:gap-6 justify-center gap-4">
                     {steps.map((step) => (
                         <div key={step.number} className="flex flex-col md:flex-row gap-2 items-center ">
-                            <div className="rounded-full w-12 h-9 flex items-center justify-center border-2 font-bold bg-transparent text-white border-white">
+                            <div className={`rounded-full w-12 h-9 flex items-center justify-center border-2 font-bold  ${currentStep === step.number ? "text-black bg-blue-300 border-blue-300" : 'text-white border-white bg-transparent'}`}>
                                 {step.number}
                             </div>
                             <div className="hidden md:flex flex-row md:flex-col w-full">

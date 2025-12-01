@@ -1,46 +1,9 @@
-import arcadeIcon from '../assets/images/icon-arcade.svg';
-import advancedIcon from '../assets/images/icon-advanced.svg';
-import ProIcon from '../assets/images/icon-pro.svg';
-import { useState } from 'react';
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
 
 export default function SelectPlan() {
-  const plans = [
-    {
-      id: 'arcade',
-      image: arcadeIcon,
-      title: 'Arcade',
-      monthlyPrice: '$9/mo',
-      yearlyPrice: '$90/yr',
-      yearlyBonus: '2 months free'
-    },
-    {
-      id: 'advanced',
-      image: advancedIcon,
-      title: 'Advanced',
-      monthlyPrice: '$12/mo',
-      yearlyPrice: '$120/yr',
-      yearlyBonus: '2 months free'
-    },
-    {
-      id: 'pro',
-      image: ProIcon,
-      title: 'Pro',
-      monthlyPrice: '$15/mo',
-      yearlyPrice: '$150/yr',
-      yearlyBonus: '2 months free'
-    }
-  ];
 
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [isYearlyBilling, setIsYearlyBilling] = useState(true);
-
-  const toggleBilling = () => {
-    setIsYearlyBilling(!isYearlyBilling);
-  };
-
-  const handlePlanSelect = (planId) => {
-    setSelectedPlan(planId);
-  };
+  const { plans, selectedPlan, handlePlanSelect, isYearlyBilling, toggleBilling } = useContext(AppContext);
 
   return (
     <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
