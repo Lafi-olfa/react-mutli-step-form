@@ -6,12 +6,12 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
     const [currentStep, setCurrentStep] = useState(1)
-
+    
   const plans = [
     {
       id: 'arcade',
       image: arcadeIcon,
-      title: 'Arcade',
+      title: "Arcade",
       monthlyPrice: '$9/mo',
       yearlyPrice: '$90/yr',
       yearlyBonus: '2 months free'
@@ -34,19 +34,46 @@ export const AppProvider = ({ children }) => {
     }
   ];
 
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  // const [selectedPlan, setSelectedPlan] = useState(null);
   const [isYearlyBilling, setIsYearlyBilling] = useState(true);
 
   const toggleBilling = () => {
     setIsYearlyBilling(!isYearlyBilling);
   };
 
-  const handlePlanSelect = (planId) => {
-    setSelectedPlan(planId);
-  };
-  const value ={ currentStep,
-    setCurrentStep,
-    plans, selectedPlan, toggleBilling, handlePlanSelect
+     const [addons, setAddons] = useState(
+        [
+            {
+                id: 'online service',
+                checked: false,
+                title: "Online service",
+                description: 'Access to multiplayer games',
+                monthlyPrice: '$1/mo',
+                yearlyPrice: '^$10/yr'
+            },
+            {
+                id:'larger storage',
+                checked: false,
+                title: "Larger storage",
+                description: 'Extra 1TB of cloud save',
+                monthlyPrice: '$2/mo',
+                yearlyPrice: '^$20/yr'
+            },
+            { 
+                id:'customizable pofile',
+                checked: false,
+                title: "Customizable profile",
+                description: 'Custom theme on your profile',
+                monthlyPrice: '$2/mo',
+                yearlyPrice: '^$20/yr'
+            }
+        ]
+
+    )
+
+    
+  const value ={ currentStep,isYearlyBilling,setIsYearlyBilling, setCurrentStep, addons,
+    plans, toggleBilling
   }
   return (
     <AppContext.Provider value={value}>

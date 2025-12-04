@@ -7,9 +7,18 @@ import Finishing from "./components/finishing";
 import ThankYou from "./components/thank-you";
 import { useContext } from "react";
 import AppContext from "./context/AppContext";
+import { FormProvider, useForm } from "react-hook-form";
 
 export default function App() {
   const { currentStep } = useContext(AppContext);
+
+  const methods = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: ""
+    }
+  })
 
   const renderStep = () => {
     switch (currentStep) {
@@ -29,15 +38,18 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden flex flex-col rounded-none md:flex-row ">
-      <Steps />
+    <FormProvider {...methods}>
+      <div className="min-h-screen overflow-x-hidden flex flex-col rounded-none md:flex-row ">
+        <Steps />
 
-      <div className="d-flex flex-row w-full">
-        {
-          renderStep()
-        }
-        <Buttons />
+        <div className="d-flex flex-row w-full">
+          {
+            renderStep()
+          }
+          <Buttons />
+        </div>
       </div>
-    </div>
+    </FormProvider>
+
   )
 }

@@ -1,40 +1,15 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useContext } from "react";
+import AppContext, { AppProvider } from "../context/AppContext";
+import { useFormContext } from "react-hook-form";
 
 export default function PickAddons() {
-    const [addons, setAddons] = useState(
-        [
-            {
-                checked: true,
-                title: "Online service",
-                description: 'Access to multiplayer games',
-                monthlyPrice: '$1/mo',
-                yearlyPrice: '^$10/yr'
-            },
-            {
-                checked: false,
-                title: "Larger storage",
-                description: 'Extra 1TB of cloud save',
-                monthlyPrice: '$2/mo',
-                yearlyPrice: '^$20/yr'
-            },
-            {
-                checked: true,
-                title: "Customizable profile",
-                description: 'Custom theme on your profile',
-                monthlyPrice: '$2/mo',
-                yearlyPrice: '^$20/yr'
-            }
-        ]
 
-    )
+    const { addons} = useContext(AppContext);
 
-    const handleChange = (index) => {
-        setAddons(prev =>
-            prev.map((item, i) =>
-                i === index ? { ...item, checked: !item.checked } : item
-            )
-        );
-    }
+  
+    const { register, formState: { errors } } = useFormContext();
+    // const selectedAddons = watch('addons');
+    // console.log('selectedAddons', selectedAddons);
     return (
         <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
             {/* Header */}
@@ -46,31 +21,44 @@ export default function PickAddons() {
             <form className="space-y-6">
                 {/* cards */}
                 <div className="flex flex-col md:justify-between gap-4">
-                    {addons.map((plan, i) => (
+                    {addons.map((addon, i) => (
                         <div
                             key={i}
-                            className={`border-2 flex flex-row md:flex-col gap-4 rounded-lg px-4 py-4 cursor-pointer hover:border-purple-500 transition-all flex-1 min-w-0 ${plan.checked ? 'border-purple-950 bg-purple-50'
+                            className={`border-2 flex flex-row md:flex-col gap-4 rounded-lg px-4 py-4 cursor-pointer hover:border-purple-500 transition-all flex-1 min-w-0 ${addon.checked ? 'border-purple-950 bg-purple-50'
                                 : 'border-gray-300 bg-white'}`}>
                             <div className="flex flex-row items-center justify-between w-full ">
                                 <div className="flex flex-row gap-2 items-center">
-                                    <input type="checkbox" className="w-4 h-4"
-                                        checked={plan.checked}
-                                        onChange={() => handleChange(i)}
+                                    <input type="checkbox" 
+                                    name="addons" 
+                                    id="addons"
+                                     className="w-4 h-4"
+                                     value={addon.id}
+                                        {...register('addons', {
+                                            required: 'You should select an addon'
+                                        })
+                                        }
+
                                     />
+
                                     <div className="flex flex-col min-w-0">
                                         <h2 className="font-bold text-marine-blue text-lg truncate">
-                                            {plan.title}
+                                            {addon.title}
                                         </h2>
                                         <p className="text-sm text-gray-500">
-                                            {plan.description}
+                                            {addon.description}
                                         </p>
                                     </div>
                                 </div>
-                                <span className="text-gray-500">{plan.monthlyPrice}</span>
+                                <span className="text-gray-500">{addon.monthlyPrice}</span>
                             </div>
                         </div>
                     ))}
                 </div>
+                {errors.addons && (
+                    <p className="text-red-600 text-sm mt-1 text-center">
+                        {errors.addons.message}
+                    </p>
+                )}
             </form>
         </div>
     )

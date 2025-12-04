@@ -1,20 +1,33 @@
 import { useContext } from "react";
 import AppContext from "../context/AppContext";
+import { useFormContext } from "react-hook-form";
 
 export default function SelectPlan() {
 
-  const { plans, selectedPlan, handlePlanSelect, isYearlyBilling, toggleBilling } = useContext(AppContext);
+  const { plans, isYearlyBilling, toggleBilling } = useContext(AppContext);
 
+  const { register, setValue, watch, formState: { errors } } = useFormContext();
+  const selectedPlan = watch('plan');
+
+  const handlePlanSelect = (planId) => {
+    setValue('plan', planId, { shouldValidate: true })
+  };
   return (
     <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
-      {/* Header */}
+   
       <div className="text-start mb-6">
         <h2 className="font-bold text-2xl text-gray-800 mb-2">Select your plan</h2>
         <p className="text-gray-500 text-lg">You have the option of monthly or yearly billing.</p>
       </div>
 
       <form className="space-y-6">
-        {/* Plan Cards */}
+        <input
+          type="hidden"
+          {...register('plan', {
+            required: 'Please select a plan'
+          })}
+        />
+        {/* cards */}
         <div className="space-y-3 flex flex-col md:flex-row md:justify-between gap-2">
           {plans.map((plan) => (
             <div
@@ -24,6 +37,10 @@ export default function SelectPlan() {
                 ? 'border-purple-950 bg-purple-50'
                 : 'border-gray-300 bg-white'
                 }`}
+              {...register('plan', {
+                required: 'You should select a plan.',
+
+              })}
             >
               <img
                 src={plan.image}
@@ -46,6 +63,11 @@ export default function SelectPlan() {
             </div>
           ))}
         </div>
+        {errors.plan && (
+          <p className="text-red-600 text-sm mt-1 text-center">
+            {errors.plan.message}
+          </p>
+        )}
 
         {/* Billing Toggle */}
         <div className="bg-gray-50 rounded-lg py-3 px-4">
@@ -81,6 +103,7 @@ export default function SelectPlan() {
             </span>
           </div>
         </div>
+        
       </form>
     </div>
   );

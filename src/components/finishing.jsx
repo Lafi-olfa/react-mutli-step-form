@@ -1,4 +1,18 @@
+// import { useContext } from "react";
+import { useFormContext } from "react-hook-form";
+// import AppContext from "../context/AppContext";
+
+
 export default function Finishing() {
+    //   const { plans } = useContext(AppContext);
+  const { watch } = useFormContext();
+
+  const selectedPlanId = watch('plan');
+  const selectedAddonsIds = watch('addons') || [];
+  
+  console.log('Plan ID sélectionné:', selectedPlanId);
+  console.log('Add-ons IDs sélectionnés:', selectedAddonsIds);
+
     return (
         <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
             {/* Header */}
