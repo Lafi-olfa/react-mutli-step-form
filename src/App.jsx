@@ -4,7 +4,6 @@ import PersonalInfo from "./components/personal-info";
 import SelectPlan from "./components/select-plan";
 import PickAddons from "./components/pick-addons";
 import Finishing from "./components/finishing";
-import ThankYou from "./components/thank-you";
 import { useContext } from "react";
 import AppContext from "./context/AppContext";
 import { FormProvider, useForm } from "react-hook-form";
@@ -30,8 +29,6 @@ export default function App() {
         return <PickAddons />
       case 4:
         return <Finishing />
-      case 5:
-        return <ThankYou />
       default:
         <PersonalInfo />
     }
