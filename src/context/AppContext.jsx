@@ -5,8 +5,8 @@ import ProIcon from '../assets/images/icon-pro.svg';
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const [currentStep, setCurrentStep] = useState(1)
-    
+  const [currentStep, setCurrentStep] = useState(1)
+
   const plans = [
     {
       id: 'arcade',
@@ -34,46 +34,47 @@ export const AppProvider = ({ children }) => {
     }
   ];
 
-  // const [selectedPlan, setSelectedPlan] = useState(null);
   const [isYearlyBilling, setIsYearlyBilling] = useState(true);
 
   const toggleBilling = () => {
     setIsYearlyBilling(!isYearlyBilling);
   };
 
-     const [addons, setAddons] = useState(
-        [
-            {
-                id: 'online service',
-                checked: false,
-                title: "Online service",
-                description: 'Access to multiplayer games',
-                monthlyPrice: '$1/mo',
-                yearlyPrice: '^$10/yr'
-            },
-            {
-                id:'larger storage',
-                checked: false,
-                title: "Larger storage",
-                description: 'Extra 1TB of cloud save',
-                monthlyPrice: '$2/mo',
-                yearlyPrice: '^$20/yr'
-            },
-            { 
-                id:'customizable pofile',
-                checked: false,
-                title: "Customizable profile",
-                description: 'Custom theme on your profile',
-                monthlyPrice: '$2/mo',
-                yearlyPrice: '^$20/yr'
-            }
-        ]
+  const [addons, setAddons] = useState(
+    [
+      {
+        id: 'online service',
+        checked: false,
+        title: "Online service",
+        description: 'Access to multiplayer games',
+        monthlyPrice: '$1/mo',
+        yearlyPrice: '$10/yr'
+      },
+      {
+        id: 'larger storage',
+        checked: false,
+        title: "Larger storage",
+        description: 'Extra 1TB of cloud save',
+        monthlyPrice: '$2/mo',
+        yearlyPrice: '$20/yr'
+      },
+      {
+        id: 'customizable pofile',
+        checked: false,
+        title: "Customizable profile",
+        description: 'Custom theme on your profile',
+        monthlyPrice: '$2/mo',
+        yearlyPrice: '$20/yr'
+      }
+    ]
 
-    )
+  )
 
-    
-  const value ={ currentStep,isYearlyBilling,setIsYearlyBilling, setCurrentStep, addons,
-    plans, toggleBilling
+  const [finish, setFinish] = useState(false);;
+
+  const value = {
+    currentStep, isYearlyBilling, setIsYearlyBilling, setCurrentStep, addons, setAddons,
+    plans, toggleBilling, finish, setFinish
   }
   return (
     <AppContext.Provider value={value}>

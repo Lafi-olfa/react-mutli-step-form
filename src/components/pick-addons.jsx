@@ -1,15 +1,13 @@
-import { ChangeEventHandler, useContext } from "react";
-import AppContext, { AppProvider } from "../context/AppContext";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
 import { useFormContext } from "react-hook-form";
 
 export default function PickAddons() {
 
-    const { addons} = useContext(AppContext);
-
+    const { addons,isYearlyBilling } = useContext(AppContext);
   
     const { register, formState: { errors } } = useFormContext();
-    // const selectedAddons = watch('addons');
-    // console.log('selectedAddons', selectedAddons);
+
     return (
         <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
             {/* Header */}
@@ -49,7 +47,9 @@ export default function PickAddons() {
                                         </p>
                                     </div>
                                 </div>
-                                <span className="text-gray-500">{addon.monthlyPrice}</span>
+                                <span className="text-gray-500">
+                                       + {isYearlyBilling? `${addon.yearlyPrice} `: `${addon.monthlyPrice}`}
+                                </span>
                             </div>
                         </div>
                     ))}

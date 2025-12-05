@@ -1,55 +1,90 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import { useFormContext } from "react-hook-form";
-// import AppContext from "../context/AppContext";
-
+import AppContext from "../context/AppContext";
+import ThankYouIcon from '../assets/images/icon-thank-you.svg';
 
 export default function Finishing() {
-    //   const { plans } = useContext(AppContext);
+
+  const { plans, addons, isYearlyBilling, finish} = useContext(AppContext);
   const { watch } = useFormContext();
 
-  const selectedPlanId = watch('plan');
-  const selectedAddonsIds = watch('addons') || [];
-  
-  console.log('Plan ID sélectionné:', selectedPlanId);
-  console.log('Add-ons IDs sélectionnés:', selectedAddonsIds);
+  const selectedPlanId = watch("plan");
+  const selectedAddonsIds = watch("addons") || [];
 
-    return (
-        <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
-            {/* Header */}
+  const selectedPlan = plans.find(p => p.id === selectedPlanId);
+  const selectedAddons = addons.filter(a => selectedAddonsIds.includes(a.id));
 
-            <div className="text-start mb-6">
-               
-                <h2 className="font-bold text-2xl text-gray-800 mb-2">Finishing up</h2>
-                <p className="text-gray-500 text-lg">Double-check everything looks OK before confirming.</p>
-            </div>
+  const getAddonPrice = (addon) => 
+    isYearlyBilling ? addon.yearlyPrice : addon.monthlyPrice;
 
-            <div className="space-y-6">
-                {/*Cards */}
-                <div className="space-y-3 flex flex-col  md:justify-between gap-2">
-                    <div className="flex flex-row justify-between">
-                        <div>
-                            <p className="text-blue-950 font-medium">Arcade (Monthly)</p>
-                            <span className="text-gray-500 underline">Change</span>
-                        </div>
-                        <span className="text-blue-950  font-bold">$90/yr</span>
-                    </div>
-                    <hr className="text-gray-200 h-1" />
-                    <div className="flex flex-row justify-between">
-                        <p className="text-gray-500 font-medium">Online service</p>
-                        <span className="text-blue-950 ">$10/yr</span>
-                    </div>
-                    <div className="flex flex-row justify-between">
-                        <p className="text-gray-500 font-medium">Larger storage</p>
-                        <span className="text-blue-950 ">$20/yr</span>
-                    </div>
+  const getPlanPrice = () =>
+    isYearlyBilling ? selectedPlan.yearlyPrice : selectedPlan.monthlyPrice;
+
+  const totalPrice = () => {
+    const planPrice = parseInt(getPlanPrice().replace(/\D/g, ""));
+    const addonsPrice = selectedAddons.reduce((sum, addon) => {
+      return sum + parseInt(getAddonPrice(addon).replace(/\D/g, ""));
+    }, 0);
+    return planPrice + addonsPrice;
+  };
+if(finish){
+    return(
+         <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 z-10  rounded-lg shadow-sm">
+                    <div className="flex items-center flex-col gap-4 mb-6">
+                       <img src={ThankYouIcon}
+                       className='w-12 h-12'
+                       alt="thank you icon" />
+                        <h2 className="font-bold text-2xl text-gray-800 mb-2">Thank you!</h2>
+                        <p className="text-gray-500">Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.</p>
+                    </div>       
                 </div>
-
-
-            </div>
-            <div className="flex flex-row justify-between mt-9">
-                <span className="text-gray-500">Total (per year)</span>
-                <span className="text-blue-800 font-bold">$120/yr</span>
-            </div>
-        </div>
     )
+} else{
+    return(
+  <div className="bg-white mx-4 -mt-8 md:mt-8 p-6 rounded-lg shadow-sm">
+      
+      <h2 className="font-bold text-2xl text-gray-800 mb-2">Finishing up</h2>
+      <p className="text-gray-500 text-lg mb-6">Double-check everything looks OK before confirming.</p>
+
+      <div className="space-y-4">
+
+        {/* Selected Plan */}
+        <div className="flex justify-between">
+          <div>
+            <p className="font-medium text-blue-900">
+              {selectedPlan.title} ({isYearlyBilling ? "Yearly" : "Monthly"})
+            </p>
+            <span className="text-gray-500 underline cursor-pointer">Change</span>
+          </div>
+          <span className="font-bold text-blue-900">{getPlanPrice()}</span>
+        </div>
+
+        <hr />
+
+        {/* Selected Addons */}
+        {selectedAddons.map(addon => (
+          <div key={addon.id} className="flex justify-between">
+            <p className="text-gray-500">{addon.title}</p>
+            <span className="text-blue-900 font-medium">
+              +{getAddonPrice(addon)}
+            </span>
+          </div>
+        ))}
+
+      </div>
+
+      {/* Total */}
+      <div className="flex justify-between mt-6">
+        <span className="text-gray-500">
+          Total (per {isYearlyBilling ? "year" : "month"})
+        </span>
+        <span className="text-blue-800 font-bold">
+          ${totalPrice()}/{isYearlyBilling ? "yr" : "mo"}
+        </span>
+      </div>
+
+    </div>
+    )
+}
+ 
 }

@@ -2,7 +2,7 @@ import { useContext } from "react"
 import AppContext from "../context/AppContext"
 
 export default function Steps() {
-    const { currentStep } = useContext(AppContext);
+    const { currentStep, } = useContext(AppContext);
     const steps = [
         {
             number: 1,
@@ -25,7 +25,7 @@ export default function Steps() {
             description: 'SUMMARY'
         }
     ]
-
+    
     return (
         <div className="w-full fiexd bg-[url('/public/assets/bg-sidebar-mobile.svg')] md:bg-[url('/public/assets/bg-sidebar-desktop.svg')] bg-no-repeat md:w-sm md:mx-2 bg-cover" id="steps">
             <div className="container mx-auto p-12">
