@@ -3,7 +3,8 @@ import AppContext from "../context/AppContext"
 import { useFormContext } from "react-hook-form";
 
 export default function Buttons() {
-  const { currentStep, setCurrentStep } = useContext(AppContext);
+  const { currentStep, setCurrentStep, setFinish, finish} = useContext(AppContext);
+
   const {handleSubmit, trigger} = useFormContext();
   const hnadleNext  = async() => {
     let fieldsToValidate= [];
@@ -25,18 +26,18 @@ export default function Buttons() {
       setCurrentStep(currentStep + 1)
     }
   };
-    const onSubmit = (data) => {
-    console.log("Form data:", data);
-    setCurrentStep(5); // Aller à l'étape de remerciement
+    const onSubmit = () => {
+    setFinish(true)
   };
    const handlePrev = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
     }
   };
-  return (
-  <div className="bg-white p-4 mt-8 flex justify-between">
-      {currentStep > 1 && (
+  if(!finish){
+    return(
+ <div className="bg-white p-4 mt-8 flex justify-between">
+      {currentStep > 1 &&(
         <button
           type="button"
           onClick={handlePrev}
@@ -56,13 +57,6 @@ export default function Buttons() {
             Next Step
           </button>
         ) : (
-          // <button
-          //   type="button"
-          //   onClick={handleSubmit(onSubmit)}
-          //   className="bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition"
-          // >
-          //   Confirm
-          // </button>
            <button
             type="button"
            onClick={handleSubmit(onSubmit)}
@@ -73,6 +67,6 @@ export default function Buttons() {
         )}
       </div>
     </div>
-  )
-
+    )
+  }
 }
